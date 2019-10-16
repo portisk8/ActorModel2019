@@ -1,0 +1,84 @@
+<div class="ui segment">
+	<h1> Listado ToDo </h1>
+  <div class="ui grid">
+    <div class="left floated eleven wide column">
+      <div class="ui grid">
+        <div class="floated eight wide column">
+          <form action="/add/todo" method="post">
+            <div class="ui action input wide">
+              <input type="text" placeholder="Ingrese Item..."  name="todo">
+              <button class="ui button teal icon button" type="submit"> >> </button>
+            </div>
+          </form>
+        </div>
+        </div>
+        <br />
+      <div class="ui grid">
+        <div class="floated eight wide column">
+          <a href="/invertir">Invertir orden</a>
+          <div class="ui celled ordered list">
+          {{#each todoList ~}}
+              <div class="item">
+                <div class="ui grid">
+                  <div class="floated eight wide column">
+                    <strong>
+                    {{descripcion}}{{' '}}
+                    </strong>
+                  </div>
+                  <div class="floated eight wide column">
+                    <a href="/delete/{{@index}}">
+                    {{!-- <button > --}}
+                      <i class="trash icon"></i>
+                    {{!-- </button> --}}
+                    </a>
+                    {{#if up}}
+                    <a href="/up/{{@index}}">
+                      <i class="angle up icon"></i>
+                    </a>
+                    {{/if}}
+                    {{#if down}}
+                    <a href="/down/{{@index}}">
+                      <i class="angle down icon"></i>
+                    </a>
+                    {{/if}}
+                  </div>
+                </div>
+              </div>
+          {{~/each}}
+          </div>
+        </div>
+
+      </div>  
+    </div>
+    <div class="right floated five wide column">
+      <div class="ui info message">
+        {{!-- <i class="close icon"></i> --}}
+        <div class="header">
+          Ayuda
+        </div>
+        <ul class="list">
+          <li>Para ingresar item:</li>
+            <ul>
+              <li value="1">Ir al campo donde dice "Ingrese Item...".</li>
+              <li value="2">Ingresar item/ToDo.</li>
+              <li value="3">Hacer click en el boton ">>".</li>
+            </ul>
+          <li>Borrar item:</li>
+            <ul>
+              <li>Click en el icono <i class="trash icon"></i>.</li>
+            </ul>
+          <li>Subir item:</li>
+            <ul>
+              <li>Click en el icono de <i class="angle up icon"></i>.</li>
+            </ul>
+          <li>Bajar item:</li>
+            <ul>
+              <li>Click en el icono de <i class="angle down icon"></i>.</li>
+            </ul>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+	
+  

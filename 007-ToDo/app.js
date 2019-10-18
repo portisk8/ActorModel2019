@@ -39,11 +39,11 @@ Handlebars.registerHelper("if_not_last", function(a, opts) {
 });
 // Model de actores
 
-const todoListService = parent =>
+const todoListService = actor =>
   spawnStateless(
-    parent,
+    actor, //Padre
     (msg, ctx) => {
-      console.log("Actor nro > ", parent.name);
+      console.log("Actor nro > ", actor.name," > ", msg.type);
       switch (msg.type) {
         case ProtocolTypes.GET_TODOLIST: {
           // Return all the items as an array
@@ -86,7 +86,7 @@ const todoListService = parent =>
           return state;
       }
     },
-    "items"
+    "items" //Name Actor
   );
 
 performQuery = async (msg, res) => {
@@ -122,6 +122,7 @@ performQuery = async (msg, res) => {
 //--- HOME ---
 
 app.use(express.static(__dirname + "/views/assets"));
+
 app.get("/", (req, res) =>
   performQuery({ type: ProtocolTypes.GET_TODOLIST }, res)
 );
@@ -133,7 +134,6 @@ app.post("/add/todo", (req, res) => {
     res
   );
 });
-
 
 //--- ELIMINAR ITEM ---
 app.get("/delete/:id", (req, res, next) =>
